@@ -1,6 +1,7 @@
 package br.com.alura.forumhub.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -8,7 +9,6 @@ import java.time.LocalDateTime;
 @Entity(name = "Topico")
 @Table(name = "topicos")
 @Data
-@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(of = "id")
@@ -17,7 +17,11 @@ public class Topico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
     private String titulo;
+
+    @Column(nullable = false)
     private String mensagem;
     private LocalDateTime dataCriacao = LocalDateTime.now();
 

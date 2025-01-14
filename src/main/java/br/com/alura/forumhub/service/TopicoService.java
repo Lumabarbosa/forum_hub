@@ -26,9 +26,11 @@ public class TopicoService {
             throw new IllegalArgumentException("Tópico já existe com o mesmo título e mensagem.");
         }
 
-        Topico topico = new Topico(null, dto.titulo(), dto.mensagem(), null, StatusTopico.NAO_RESPONDIDO, dto.autor(), dto.curso());
+        var topico = new Topico();
+        topico.setTitulo(dto.titulo());
+        topico.setMensagem(dto.mensagem());
         topico.setDataCriacao(LocalDateTime.now());
-        Topico salvo = repository.save(topico);
+        var salvo = repository.save(topico);
         return new TopicoResponseDTO(salvo.getId(), salvo.getTitulo(), salvo.getMensagem(), salvo.getDataCriacao(), salvo.getEstado().name(), salvo.getAutor(), salvo.getCurso());
     }
 

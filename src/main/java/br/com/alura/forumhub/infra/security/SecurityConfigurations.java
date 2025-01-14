@@ -1,4 +1,4 @@
-package br.com.alura.forumhub.config;
+package br.com.alura.forumhub.infra.security;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +29,11 @@ public class SecurityConfigurations {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> {
                     req.requestMatchers("/login").permitAll();
-                    req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
-                    req.requestMatchers(HttpMethod.DELETE, "/medicos").hasRole("ADMIN");
-                    req.requestMatchers(HttpMethod.DELETE, "/pacientes").hasRole("ADMIN");
+//                    req.requestMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll();
+                    req.requestMatchers(HttpMethod.POST, "/topicos");
+                    req.requestMatchers(HttpMethod.GET, "/topicos");
+                    req.requestMatchers(HttpMethod.PUT, "/topicos");
+                    req.requestMatchers(HttpMethod.DELETE, "/topicos");
                     req.anyRequest().authenticated();
                 })
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
